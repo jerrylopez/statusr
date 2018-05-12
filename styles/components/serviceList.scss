@@ -1,0 +1,22 @@
+@import '../partials/section';
+
+.services {
+    width: 100%;
+    border-radius: 4px;
+    border: 1px solid #e3e3e3;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 0;
+}
+
+.service{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding:20px;
+    border-bottom: 1px solid #e3e3e3;
+}
+
+.service:last-child {
+    border-bottom: 0;
+}
