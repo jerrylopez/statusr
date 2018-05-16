@@ -7,7 +7,7 @@ function ServiceStatus ({
     data: { loading, error, repository}
 }) {
     let status = getStatus(repository.label.issues)
-    console.log(status)
+
     return (
         <span className={css.serviceStatus} style={status.style}>{status.name}</span>
     )
@@ -18,7 +18,7 @@ function getStatus(issues) {
         return {
             name: 'Operational',
             style: {
-                color: '#2fcc66'
+                color: '#00b894'
             }
         }
     } else {
