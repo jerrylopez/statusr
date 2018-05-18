@@ -10,7 +10,7 @@ function StatusBar ({
     data: { loading, error, repository}
 }) {
     let status = getStatus(repository.issues)
-
+    
     return (
         <div>
             <div className={css.section}>
@@ -27,9 +27,9 @@ function getStatus (issues) {
 }
 
 export const issues = gql`
-    query StatusBar {
-        repository(owner:"jerrylopez", name:"dus-demo") {
-            issues(last:20, states:OPEN){
+    query StatusBar($owner: String!, $name: String!, $labels: [String!]) {
+        repository(owner:$owner, name:$name) {
+            issues(last:20, states:OPEN, labels:$labels){
                 totalCount   
             }
         }
@@ -37,9 +37,17 @@ export const issues = gql`
 `
 
 export default graphql(issues, {
-    props: ({ data }) => {
-      return ({
-        data
-      })
+    options: (ownProps) => ({
+        variables: {
+            owner: ownProps.statusr.github.username,
+            name: ownProps.statusr.github.repository,
+            labels: ownProps.statusr.service.labels
+        },
+    }),
+    props: ({ ownProps, data }) => {
+        return ({
+            ownProps,
+            data
+        })
     }
 })(StatusBar)
